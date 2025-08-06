@@ -1,0 +1,11 @@
+logging:
+  file:
+    name: /app/logs  # 日志文件名，全路径
+mysql:
+  url: mysql
+  password: -替换github1
+redis:
+  url: redis
+  password: -替换github2
+ai:
+  key: -替换github3

@@ -20,7 +20,7 @@ public class ChatController {
     @RequestMapping(value = "/chat", produces = "text/stream;charset=utf-8")
     public Flux<String> chat(String prompt,
                              @RequestParam(defaultValue = "chat") String model,
-                             @RequestParam(defaultValue = "明星")String role,
+                             @RequestParam(defaultValue = "杠精")String role,
                              @RequestParam(defaultValue = "1")String user) {
         return chat.get(model).prompt()
                 .user(prompt)

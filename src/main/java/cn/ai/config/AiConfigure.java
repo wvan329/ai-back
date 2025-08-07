@@ -3,6 +3,7 @@ package cn.ai.config;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SafeGuardAdvisor;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.ChatMemoryRepository;
 
@@ -29,7 +30,7 @@ public class AiConfigure {
                         //自定义拦截器
 //                        new MyAdvisor(),
                         //记录输入输出日志
-//                        new SimpleLoggerAdvisor(),
+                        new SimpleLoggerAdvisor(),
                         //敏感词拦截器
                         new SafeGuardAdvisor(List.of("王广阔"), "你怎么敢", 1),
                         //上下文记忆

@@ -93,10 +93,10 @@
             <appender-ref ref="console_debug"/>
             <appender-ref ref="debug"/>
         </logger>
-        <logger name="org.springframework.ai.chat.client.advisor" level="DEBUG" additivity="false">
-            <appender-ref ref="console_debug"/>
-            <appender-ref ref="debug"/>
-        </logger>
+<!--        <logger name="org.springframework.ai.chat.client.advisor" level="DEBUG" additivity="false">-->
+<!--            <appender-ref ref="console_debug"/>-->
+<!--            <appender-ref ref="debug"/>-->
+<!--        </logger>-->
         <root level="error">
             <appender-ref ref="console_error"/>
             <appender-ref ref="error"/>
@@ -107,9 +107,9 @@
         <logger name="cn.satoken.mapper" level="DEBUG" additivity="false">
             <appender-ref ref="debug"/>
         </logger>
-<!--        <logger name="org.springframework.ai.chat.client.advisor" level="DEBUG" additivity="false">-->
-<!--            <appender-ref ref="debug"/>-->
-<!--        </logger>-->
+        <logger name="org.springframework.ai.chat.client.advisor" level="DEBUG" additivity="false">
+            <appender-ref ref="debug"/>
+        </logger>
         <root level="error">
             <appender-ref ref="error"/>
         </root>

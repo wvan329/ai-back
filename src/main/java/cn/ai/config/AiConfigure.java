@@ -32,7 +32,7 @@ public class AiConfigure {
                         //记录输入输出日志
 //                        new SimpleLoggerAdvisor(),
                         //敏感词拦截器
-                        new SafeGuardAdvisor(List.of("王广阔"), "你怎么敢", 1),
+//                        new SafeGuardAdvisor(List.of("王广阔"), "你怎么敢", 1),
                         //上下文记忆
                         //PromptChatMemoryAdvisor与MessageChatMemoryAdvisor功能类似
                         //PromptChatMemoryAdvisor兼容更多模型，用这个即可

@@ -8,4 +8,4 @@ redis:
   url: redis
   password: -替换github2
 ai:
-  key: -替换github3
+  deep-key: -替换github3

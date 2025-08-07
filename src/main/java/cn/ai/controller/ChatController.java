@@ -1,22 +1,31 @@
 package cn.ai.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/ai")
 public class ChatController {
 
     @Autowired
-    private ChatClient chat;
+    private Map<String, ChatClient> chat;
 
-    @RequestMapping(value = "/chat", produces = "text/html;charset=utf-8")
-    public Flux<String> chat(String prompt) {
-        return chat.prompt()
+    @RequestMapping(value = "/chat", produces = "text/stream;charset=utf-8")
+    public Flux<String> chat(String prompt,
+                             @RequestParam(defaultValue = "chat") String model,
+                             @RequestParam(defaultValue = "明星")String role,
+                             @RequestParam(defaultValue = "1")String user) {
+        return chat.get(model).prompt()
                 .user(prompt)
+                .system(p -> p.param("role", role))
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, user))
                 .stream()
                 .content();
     }

@@ -30,7 +30,7 @@ public class AiConfigure {
                         //自定义拦截器
 //                        new MyAdvisor(),
                         //记录输入输出日志
-                        new SimpleLoggerAdvisor(),
+//                        new SimpleLoggerAdvisor(),
                         //敏感词拦截器
                         new SafeGuardAdvisor(List.of("王广阔"), "你怎么敢", 1),
                         //上下文记忆

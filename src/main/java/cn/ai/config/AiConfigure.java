@@ -69,7 +69,7 @@ public class AiConfigure {
 
         //自带的记忆会自动把数据库里之前的对话也删了，我觉得所有对话都可以保存下来，所以自己改造了MyMessageWindowChatMemory
         return MyMessageWindowChatMemory.builder()
-                .maxMessages(14)
+                .maxMessages(20)
                 //一旦引入JdbcChatMemoryRepository这个依赖，注入的就是JdbcChatMemoryRepository仓库了
                 //因为JdbcChatMemoryRepositoryAutoConfiguration的自动配置类有顺序，在ChatMemoryAutoConfiguration之前执行。
                 .chatMemoryRepository(chatMemoryRepository)

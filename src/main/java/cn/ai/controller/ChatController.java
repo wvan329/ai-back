@@ -23,7 +23,7 @@ public class ChatController {
                              @RequestParam(defaultValue = "1")String user) {
         return chat.get(model).prompt()
                 .user(prompt)
-                .system(p -> p.param("role", "杠精"))
+//                .system(p -> p.param("role", "杠精"))
                 .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, user))
                 .stream()
                 .content();

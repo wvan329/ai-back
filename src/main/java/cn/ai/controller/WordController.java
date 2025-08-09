@@ -37,7 +37,7 @@ public class WordController {
     @Value("classpath:/ai/hanzi-prompt.st")
     private Resource hanziPrompt;
 
-    @RequestMapping(value = "/getWords", produces = "text/stream;charset=utf-8")
+    @RequestMapping(value = "/getWords")
     @SneakyThrows
     public Result getWords(@RequestParam String word) {
         Word w = wordService.lambdaQuery().eq(Word::getWord, word).one();

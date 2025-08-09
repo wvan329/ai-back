@@ -1,32 +1,22 @@
 package cn.ai.config;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
-import org.springframework.ai.chat.client.advisor.SafeGuardAdvisor;
-import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.ChatMemoryRepository;
 
 import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
-
-import java.util.List;
 
 @Configuration
 public class AiConfigure {
 
-    @Value("classpath:/ai/system-prompt.st")
-    private Resource systemPrompt;
-
     @Bean
-    public ChatClient chat(ChatModel model, ChatMemory chatMemory) {
+    public ChatClient ai(ChatModel model, ChatMemory chatMemory) {
         return ChatClient
                 .builder(model)
-                .defaultSystem(systemPrompt)
-                .defaultAdvisors(
+//                .defaultSystem(chatPrompt)
+//                .defaultAdvisors(
                         //自定义拦截器
 //                        new MyAdvisor(),
                         //记录输入输出日志
@@ -36,9 +26,10 @@ public class AiConfigure {
                         //上下文记忆
                         //PromptChatMemoryAdvisor与MessageChatMemoryAdvisor功能类似
                         //PromptChatMemoryAdvisor兼容更多模型，用这个即可
-                        PromptChatMemoryAdvisor.builder(chatMemory).build()
+//                        PromptChatMemoryAdvisor.builder(chatMemory).build()
 //                        MessageChatMemoryAdvisor.builder(chatMemory).build()
-                ).build();
+//                )
+        .build();
     }
 
 /*    @Bean

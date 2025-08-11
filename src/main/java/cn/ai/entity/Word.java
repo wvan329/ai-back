@@ -33,7 +33,7 @@ public class Word implements Serializable {
     private String word;
 
     @TableField(typeHandler = JacksonTypeHandler.class)
-    private List<String> words;
+    private List words;
 
 
 }

@@ -9,3 +9,4 @@ redis:
   password: -替换github2
 ai:
   deep-key: -替换github3
+  ali-key: -替换github4

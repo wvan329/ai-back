@@ -4,15 +4,15 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.ChatMemoryRepository;
 
-import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.deepseek.DeepSeekChatModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AiConfigure {
+public class AIConfigure {
 
     @Bean
-    public ChatClient ai(ChatModel model, ChatMemory chatMemory) {
+    public ChatClient deepseekChat(DeepSeekChatModel model, ChatMemory chatMemory) {
         return ChatClient
                 .builder(model)
 //                .defaultSystem(chatPrompt)
@@ -31,6 +31,13 @@ public class AiConfigure {
 //                )
         .build();
     }
+
+//    @Bean
+//    public ChatClient aliTts(DashScopeImageModel model, ChatMemory chatMemory) {
+//        return imageclient
+//                .builder(model)
+//                .build();
+//    }
 
 /*    @Bean
     public ChatClient reasoner(ChatModel model, ChatMemory chatMemory) {

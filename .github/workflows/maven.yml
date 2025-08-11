@@ -25,6 +25,7 @@ jobs:
           sed -i "s/-替换github1/${{ secrets.PASSWORD }}/" src/main/resources/application-prod.yml
           sed -i "s/-替换github2/${{ secrets.PASSWORD }}/" src/main/resources/application-prod.yml
           sed -i "s/-替换github3/${{ secrets.deepseekApi }}/" src/main/resources/application-prod.yml
+          sed -i "s/-替换github4/${{ secrets.aliApi }}/" src/main/resources/application-prod.yml
 
 
       # Step 3: 安装 JDK 17

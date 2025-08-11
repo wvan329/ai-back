@@ -1,6 +1,8 @@
 ﻿server:
   # 端口
   port: 8080
+  tomcat:
+    connection-timeout: 300000 #300秒
 
 spring:
   profiles:

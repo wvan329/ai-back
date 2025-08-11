@@ -73,7 +73,7 @@ public class AIController {
         if (w != null) {
             Map<String, Object> resultMap = new HashMap<>();
             resultMap.put("text", w.getWords());
-            resultMap.put("url", "app/audio/" + word + ".mp3"); // 前端直接访问
+            resultMap.put("url", "ai/audio/" + word + ".mp3"); // 前端直接访问
             return Result.data(resultMap);
         }
 

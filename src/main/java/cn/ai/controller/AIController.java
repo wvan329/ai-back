@@ -37,7 +37,7 @@ public class AIController {
     ObjectMapper objectMapper;
     @Autowired
     IWordService wordService;
-//    @Autowired
+    //    @Autowired
 //    DashScopeSpeechSynthesisModel ttsModel;
     MultiModalConversation conv = new MultiModalConversation();
     @Autowired
@@ -48,6 +48,8 @@ public class AIController {
     private Resource hanziPrompt;
     @Value("classpath:/ai/chat-prompt.st")
     private Resource chatPrompt;
+    @Value("${ai.ali-key}")
+    private String aliKey;
 
     @GetMapping(value = "/chat", produces = "text/stream;charset=utf-8")
     public Flux<String> chat(String prompt, @RequestParam(defaultValue = "1") String user) {
@@ -88,12 +90,16 @@ public class AIController {
                 .model(MODEL)
                 .text(wordList.toString())
                 .voice(AudioParameters.Voice.CHERRY)
-                .apiKey("sk-5e4d300f4d694f339f8b541727ec13b4")
+                .apiKey(aliKey)
                 .build();
         MultiModalConversationResult result = conv.call(param);
         String audioUrl = result.getOutput().getAudio().getUrl();
 
         // 下载音频文件到本地
+        File dir = new File("audio");
+        if (!dir.exists()) {
+            dir.mkdirs();  // 递归创建目录
+        }
         try (InputStream in = new URL(audioUrl).openStream();
              FileOutputStream out = new FileOutputStream("audio/" + word + ".mp3")) {
             byte[] buffer = new byte[1024];

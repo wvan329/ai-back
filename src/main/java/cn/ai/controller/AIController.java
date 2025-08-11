@@ -72,7 +72,7 @@ public class AIController {
         if (w != null) {
             Map<String, Object> resultMap = new HashMap<>();
             resultMap.put("text", w.getWords());
-            resultMap.put("url", "audio/" + word + ".mp3"); // 前端直接访问
+            resultMap.put("url", "app/audio/" + word + ".mp3"); // 前端直接访问
             return Result.data(resultMap);
         }
 
@@ -96,12 +96,12 @@ public class AIController {
         String audioUrl = result.getOutput().getAudio().getUrl();
 
         // 下载音频文件到本地
-        File dir = new File("audio");
+        File dir = new File("app/audio");
         if (!dir.exists()) {
             dir.mkdirs();  // 递归创建目录
         }
         try (InputStream in = new URL(audioUrl).openStream();
-             FileOutputStream out = new FileOutputStream("audio/" + word + ".mp3")) {
+             FileOutputStream out = new FileOutputStream("app/audio/" + word + ".mp3")) {
             byte[] buffer = new byte[1024];
             int bytesRead;
             while ((bytesRead = in.read(buffer)) != -1) {
@@ -134,7 +134,7 @@ public class AIController {
     @GetMapping("/audio/{fileName}")
     @SneakyThrows
     public void getAudio(@PathVariable String fileName, HttpServletResponse response) {
-        File file = new File("audio/" + fileName);
+        File file = new File("app/audio/" + fileName);
         response.setContentType("audio/mpeg");
         Files.copy(file.toPath(), response.getOutputStream());
     }

@@ -1,5 +1,6 @@
 package cn.ai.config;
 
+import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatModel;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.ChatMemoryRepository;
@@ -30,6 +31,12 @@ public class AIConfigure {
 //                        MessageChatMemoryAdvisor.builder(chatMemory).build()
 //                )
         .build();
+    }
+    @Bean
+    public ChatClient aliChat(DashScopeChatModel model, ChatMemory chatMemory) {
+        return ChatClient
+                .builder(model)
+                .build();
     }
 
 //    @Bean

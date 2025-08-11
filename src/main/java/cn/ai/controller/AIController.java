@@ -16,6 +16,7 @@ import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
@@ -68,6 +69,7 @@ public class AIController {
 
     @GetMapping("/getWords")
     @SneakyThrows
+    @Transactional(rollbackFor = Throwable.class)
     public Result getWords(@RequestParam String word) {
         Word w = wordService.lambdaQuery().eq(Word::getWord, word).one();
         if (w != null) {
@@ -85,7 +87,6 @@ public class AIController {
                 .content();
         List<String> wordList = objectMapper.readValue(words, List.class);
         Word build = Word.builder().word(word).words(wordList).build();
-        wordService.save(build);
 
         sb.setLength(0);
         for (String s : wordList) {
@@ -114,20 +115,7 @@ public class AIController {
                 out.write(buffer, 0, bytesRead);
             }
         }
-//
-//        SpeechSynthesisResponse call = ttsModel.call(new SpeechSynthesisPrompt(wordList.toString()));
-//        ByteBuffer audio = call.getResult().getOutput().getAudio();
-//        File dir = new File("audio");
-//        if (!dir.exists()) {
-//            dir.mkdirs();  // 递归创建目录
-//        }
-//        File file = new File(dir, word + ".mp3");
-//        try (FileOutputStream fos = new FileOutputStream(file)) {
-//            fos.write(audio.array());
-//        }
-//        try (FileOutputStream fos = new FileOutputStream(file)) {
-//            fos.write(audio.array());
-//        }
+        wordService.save(build);
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("text", build.getWords());

@@ -40,6 +40,7 @@ public class AIController {
     //    @Autowired
 //    DashScopeSpeechSynthesisModel ttsModel;
     MultiModalConversation conv = new MultiModalConversation();
+    StringBuilder sb = new StringBuilder();
     @Autowired
     private Map<String, ChatClient> aiMap;
     @Autowired
@@ -86,9 +87,14 @@ public class AIController {
         Word build = Word.builder().word(word).words(wordList).build();
         wordService.save(build);
 
+        sb.setLength(0);
+        for (String s : wordList) {
+            sb.append(s).append("。").append("\n");
+        }
+
         MultiModalConversationParam param = MultiModalConversationParam.builder()
                 .model(MODEL)
-                .text(wordList.toString())
+                .text(sb.toString())
                 .voice(AudioParameters.Voice.CHERRY)
                 .apiKey(aliKey)
                 .build();

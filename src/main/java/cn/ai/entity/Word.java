@@ -30,10 +30,9 @@ public class Word implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    //汉字
     private String word;
 
     @TableField(typeHandler = JacksonTypeHandler.class)
-    private List words;
-
-
+    private List<String> words;
 }

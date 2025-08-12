@@ -53,22 +53,23 @@ public class AIController {
     @Value("${ai.ali-key}")
     private String aliKey;
 
-    @GetMapping(value = "/chat", produces = "text/stream;charset=utf-8")
-    public Flux<String> chat(String prompt, @RequestParam(defaultValue = "1") String user) {
-        return aiMap.get("deepseekChat")
-                .prompt()
-                .user(prompt)
-                .system(chatPrompt)
-//                .system(p -> p.param("role", "杠精"))
-                .advisors(PromptChatMemoryAdvisor.builder(chatMemory).build())
-                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, user))
-                .stream()
-                .content();
-    }
+//    @GetMapping(value = "/chat", produces = "text/stream;charset=utf-8")
+//    public Flux<String> chat(String prompt, @RequestParam(defaultValue = "1") String user) {
+//        return aiMap.get("deepseekChat")
+//                .prompt()
+//                .user(prompt)
+//                .system(chatPrompt)
+////                .system(p -> p.param("role", "杠精"))
+//                .advisors(PromptChatMemoryAdvisor.builder(chatMemory).build())
+//                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, user))
+//                .stream()
+//                .content();
+//    }
 
 
     @GetMapping("/getWords")
     @SneakyThrows
+    @SuppressWarnings("unchecked")
     @Transactional(rollbackFor = Throwable.class)
     public Result getWords(@RequestParam String word) {
         Word w = wordService.lambdaQuery().eq(Word::getWord, word).one();

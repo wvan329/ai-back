@@ -33,7 +33,7 @@ import java.util.Map;
 @RequestMapping("/ai")
 public class AIController {
 
-    private static final String MODEL = "qwen-tts";
+    private static final String MODEL = "qwen3-tts-flash";
     @Autowired
     ObjectMapper objectMapper;
     @Autowired
